@@ -20,14 +20,22 @@ export class HomeComponent implements OnInit {
     this.loadPokemonByGeneration(this.selectedGeneration);
   }
 
-  onGenerationChange(event: Event): void {
-    const select = event.target as HTMLSelectElement;
-    const gen = Number(select.value);
-    if (gen !== this.selectedGeneration) {
-      this.selectedGeneration = gen;
-      this.loadPokemonByGeneration(gen);
-    }
+  onGenerationChange(event: Event) {
+    const value = (event.target as HTMLSelectElement).value;
+    this.loadPokemonByGeneration(Number(value));
   }
+
+  generations = [
+    { value: 1, label: 'Generazione 1' },
+    { value: 2, label: 'Generazione 2' },
+    { value: 3, label: 'Generazione 3' },
+    { value: 4, label: 'Generazione 4' },
+    { value: 5, label: 'Generazione 5' },
+    { value: 6, label: 'Generazione 6' },
+    { value: 7, label: 'Generazione 7' },
+    { value: 8, label: 'Generazione 8' },
+    { value: 9, label: 'Generazione 9' }
+  ];
 
   loadPokemonByGeneration(gen: number): void {
     this.isLoading = true;

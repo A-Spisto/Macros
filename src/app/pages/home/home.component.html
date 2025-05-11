@@ -1,32 +1,18 @@
 <div class="container">
   <h1>Pokedex</h1>
 
-  <!-- Selezione della generazione -->
-  <div>
-    <label for="generation">Seleziona una generazione:</label>
-    <select id="generation" (change)="onGenerationChange($event)">
-      <option value="1">Generazione 1</option>
-      <option value="2">Generazione 2</option>
-      <option value="3">Generazione 3</option>
-      <option value="4">Generazione 4</option>
-      <option value="5">Generazione 5</option>
-      <option value="6">Generazione 6</option>
-      <option value="7">Generazione 7</option>
-      <option value="8">Generazione 8</option>
-    </select>
-  </div>
-
-  <!-- Stato di caricamento -->
-  <div *ngIf="isLoading" class="loading">Caricamento...</div>
-
-  <!-- Visualizzazione dei Pokémon -->
+  <select id="generation" (change)="onGenerationChange($event)">
+    <option *ngFor="let g of generations" [value]="g.value">
+      {{ g.label }}
+    </option>
+  </select>
+  <div class="pokedex-wrapper">
   <div class="grid">
-    <div class="card" *ngFor="let p of pokemonList">
+    <div class="card {{ p.types[0].type.name }}" *ngFor="let p of pokemonList">
       <img [src]="p.sprites?.front_default" [alt]="p.name" class="pokemon-img" />
       <h2>{{ p.id }}. {{ p.name | titlecase }}</h2>
-      <p *ngIf="p.types?.length">
-        Tipo: {{ p.types[0].type.name | titlecase }}
-      </p>
+      <p *ngIf="p.types && p.types.length">Tipo: {{ p.types[0].type.name | titlecase }}</p>
     </div>
   </div>
+</div>
 </div>
